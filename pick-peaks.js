@@ -23,88 +23,28 @@ function pickPeaks(arr){
   let counter = 0;
   let pic = {pos: [], peaks: []};
 
-  for (let i of arr){
-    if (i > arr[counter - 1] && i > arr[counter + 1]) {
+  for (let i of arr) {
+    if (i > arr[counter - 1] && i > arr[counter + 1]){
       pic.pos.push(counter);
       pic.peaks.push(i);
     }
-    if (i > arr[counter - 1] && i === arr[counter + 1]) {
-      pic.pos.push(counter);
-      pic.peaks.push(i);
-    } 
     counter++;
   }
+  
+  for (let j = 0; j < arr.length; j++){
+    if (arr[j] === arr[j + 1] && arr[j] > arr[j + 2]) {
+      pic.pos.push(j);
+      pic.peaks.push(arr[j]);
+    };  
+  };
+  
   return pic;
 }
 
- /* 
-  const node = (arr) => {
-    let length = 0;
-    let first = null;
-    let last = null;
-    let prev = null;
-    let next = null;
-    const element = (arr) => {
-      prev = last;
-      if (arr.length === 0) first = element;
-      else next = element;
-      last = element;
-      length++;
-      return element;
-    }
-    // return element(arr);
-  }
-  return node;
-}
-*/
 
-console.dir(pickPeaks([1,2,3,6,4,1,2,3,2,1])); 
-console.dir(pickPeaks([3,2,3,6,4,1,2,3,2,1,2,2,2,1])) 
+console.dir(pickPeaks([1,2,3,6,4,1,2,3,2,1])); // {pos:[3,7],peaks:[6,3]} 
+console.dir(pickPeaks([3,2,3,6,4,1,2,3,2,1,2,2,2,1])) // {pos:[3,7,10],peaks:[6,3,2]}
 console.dir(pickPeaks([1,2,5,4,3,2,3,6,4,1,2,3,3,4,5,3,2,1,2,3,5,5,4,3])); // {pos:[2,7,14,20], peaks:[5,6,5,5]});
 console.dir(pickPeaks([2,1,3,1,2,2,2,2,1])) // {pos:[2,4], peaks:[3,2]}
 console.dir(pickPeaks([1,1,1,1])) //{pos:[],peaks:[]})
-
-
-
-/*
-  let pic = {pos: [], peaks: []};
-  
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i] > arr[i - 1] && arr[i] > arr[i + 1]) {
-      pic.pos.push(i);
-      pic.peaks.push(arr[i]);
-    } else if (arr[i] > arr[i - 1] && arr[i] === arr[i + 1]) {
-      for (let j = i + 1; j < arr.length; j++) {
-        if (arr[j] > arr[j + 1]) {
-          pic.pos.push(i);
-          pic.peaks.push(arr[i]);
-          break;
-        } else if (arr[j] < arr[j + 1]) {
-          break
-        } else if (arr[j] === arr[j + 1]) {
-          if (arr[j] > arr[j - 1]) {
-            pic.pos.push(i);
-            pic.peaks.push(arr[i])
-            break;
-          }
-          else {
-            break;
-          }
-        }
-      }
-    }
-  }
-      return pic;
-}
-    
-  
-*/
-  
-
-// console.dir(pickPeaks([3, 2, 3, 6, 4, 1, 2, 3, 2, 1, 2, 3]));
-// console.dir(pickPeaks([0, 1, 2, 5, 1, 0]))
-// console.dir(pickPeaks([1,2,3,6,4,1,2,3,2,1])); 
-// console.dir(pickPeaks([3,2,3,6,4,1,2,3,2,1,2,2,2,1])); // {pos:[3,7,10], peaks:[6,3,2]});
-
-  
-  //  return {pos:[],peaks:[]}[0, 1, 2, 5, 1, 0]
+console.dir(pickPeaks([1,2,2,2,1])) // {pos:[1],peaks:[2]}
