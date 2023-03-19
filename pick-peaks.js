@@ -22,29 +22,44 @@ Have fun!
 function pickPeaks(arr){
   let counter = 0;
   let pic = {pos: [], peaks: []};
+  let min = arr[0];
+  let max = min;
+  let minArr = {posMin:[], peaksMin:[]};
+  let maxArr = {posMax:[], peaksMax:[]};
 
   for (let i of arr) {
     if (i > arr[counter - 1] && i > arr[counter + 1]){
       pic.pos.push(counter);
       pic.peaks.push(i);
-    }
+      
+
+    } else {
+      if (i > arr[counter - 1] && i === arr[counter + 1] && i === arr[counter + 2] && i < arr[counter + 3])  {
+        
+      } else { 
+          pic.pos.push(counter);
+          pic.peaks.push(i);
+          
+        }
+      }
+    
     counter++;
   }
-  
-  for (let j = 0; j < arr.length; j++){
-    if (arr[j] === arr[j + 1] && arr[j] > arr[j + 2]) {
-      pic.pos.push(j);
-      pic.peaks.push(arr[j]);
-    };  
-  };
-  
   return pic;
 }
 
 
-console.dir(pickPeaks([1,2,3,6,4,1,2,3,2,1])); // {pos:[3,7],peaks:[6,3]} 
-console.dir(pickPeaks([3,2,3,6,4,1,2,3,2,1,2,2,2,1])) // {pos:[3,7,10],peaks:[6,3,2]}
+
+
+      
+      
+  
+
+
+
+// console.dir(pickPeaks([1,2,3,6,4,1,2,3,2,1])); // {pos:[3,7],peaks:[6,3]} 
+// console.dir(pickPeaks([3,2,3,6,4,1,2,3,2,1,2,2,2,1])) // {pos:[3,7,10],peaks:[6,3,2]}
 console.dir(pickPeaks([1,2,5,4,3,2,3,6,4,1,2,3,3,4,5,3,2,1,2,3,5,5,4,3])); // {pos:[2,7,14,20], peaks:[5,6,5,5]});
-console.dir(pickPeaks([2,1,3,1,2,2,2,2,1])) // {pos:[2,4], peaks:[3,2]}
-console.dir(pickPeaks([1,1,1,1])) //{pos:[],peaks:[]})
-console.dir(pickPeaks([1,2,2,2,1])) // {pos:[1],peaks:[2]}
+// console.dir(pickPeaks([2,1,3,1,2,2,2,2,1])) // {pos:[2,4], peaks:[3,2]}
+// console.dir(pickPeaks([1,1,1,1])) //{pos:[],peaks:[]})
+// console.dir(pickPeaks([1,2,2,2,1])) // {pos:[1],peaks:[2]}
