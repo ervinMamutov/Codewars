@@ -18,7 +18,7 @@ Also, beware of plateaus !!! [1, 2, 2, 2, 1] has a peak while [1, 2, 2, 2, 3] an
 
 Have fun!
 */
-
+/*
 function pickPeaks(arr){
   let counter = 0;
   let pic = {pos: [], peaks: []};
@@ -49,17 +49,67 @@ function pickPeaks(arr){
 }
 
 
+*/
+
+/*
+function pickPeaks(arr) {
+  const pos = [];
+  const peaks = [];
+  let plateauStart = -1;
+  
+  for (let i = 1; i < arr.length - 1; i++) {
+    if (arr[i] > arr[i - 1]) {  // potential peak
+      plateauStart = i;
+    } else if (arr[i] < arr[i - 1] && plateauStart !== -1) {  // actual peak
+      pos.push(plateauStart);
+      peaks.push(arr[plateauStart]);
+      plateauStart = -1;
+    } else if (arr[i] === arr[i - 1]) {  // plateau
+      plateauStart = -1;
+    }
+  }
+  
+  return { pos, peaks };
+}
+*/
+
+function pickPeaks(arr) {
+  let pos = [];
+  let peaks = [];
+
+  for (let i = 1; i < arr.length - 1; i++) {
+    if (arr[i] > arr[i - 1]) {
+      let j = i;
+      while (j < arr.length - 1 && arr[j] === arr[i]) {
+        j++;
+      }
+      if (arr[j] < arr[i + 1]) {
+        pos.push(i);
+        peaks.push(arr[i]);
+      }
+    }
+  }
+
+  return { pos, peaks };
+}
+
+console.log(pickPeaks([1,2,5,4,3,2,3,6,4,1,2,3,3,4,5,3,2,1,2,3,5,5,4,3]));
+
+
+
 
 
       
       
   
 
+/*
 
-
-// console.dir(pickPeaks([1,2,3,6,4,1,2,3,2,1])); // {pos:[3,7],peaks:[6,3]} 
-// console.dir(pickPeaks([3,2,3,6,4,1,2,3,2,1,2,2,2,1])) // {pos:[3,7,10],peaks:[6,3,2]}
+console.dir(pickPeaks([1,2,3,6,4,1,2,3,2,1])); // {pos:[3,7],peaks:[6,3]} 
+console.dir(pickPeaks([3,2,3,6,4,1,2,3,2,1,2,2,2,1])) // {pos:[3,7,10],peaks:[6,3,2]}
 console.dir(pickPeaks([1,2,5,4,3,2,3,6,4,1,2,3,3,4,5,3,2,1,2,3,5,5,4,3])); // {pos:[2,7,14,20], peaks:[5,6,5,5]});
-// console.dir(pickPeaks([2,1,3,1,2,2,2,2,1])) // {pos:[2,4], peaks:[3,2]}
-// console.dir(pickPeaks([1,1,1,1])) //{pos:[],peaks:[]})
-// console.dir(pickPeaks([1,2,2,2,1])) // {pos:[1],peaks:[2]}
+console.dir(pickPeaks([2,1,3,1,2,2,2,2,1])) // {pos:[2,4], peaks:[3,2]}
+console.dir(pickPeaks([1,1,1,1])) //{pos:[],peaks:[]})
+console.dir(pickPeaks([1,2,2,2,1])) // {pos:[1],peaks:[2]}
+
+*/
